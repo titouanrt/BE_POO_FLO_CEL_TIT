@@ -5,6 +5,24 @@
  *********************************************************************/
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
+
+/**
+  * @class Application
+  * @brief Classe Application 
+*/    
+class Application
+{
+  public :
+    /**
+     * @fn Application();
+     * @brief Constructeur par defaut
+    */    
+    Application();
+    /**
+     * @fn Application();
+     * @brief Destructeur
+    */    
+    ~Application();    
     /**
      * @fn void init_application(void)
      * @brief Fonction d'initialisation de l'application
@@ -15,4 +33,5 @@
      * @brief Fonction de lancement de l'application
     */
     void run_appplication(void);
+};
 #endif

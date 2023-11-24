@@ -1,13 +1,15 @@
 #include "Application.h"
 
+Application myApplication;
+
 void setup() 
 {
   // put your setup code here, to run once:
-  init_application();
+  myApplication.init_application();
 }
 
 void loop() 
 {
   // put your main code here, to run repeatedly:
-  run_appplication();
+  myApplication.run_appplication();
 }

@@ -6,13 +6,27 @@
 #include "Application.h"
 
 
-void init_application(void)
+Application::Application()
 {
+  // Code
+  ; 
+}
+  
+Application::~Application()
+{
+  // Code
+  ;
+}  
+
+void Application::init_application(void)
+{
+  // Code
     ;
 }
 
 
-void run_appplication(void)
+void Application::run_appplication(void)
 {
+  // Code
     ;
 }
