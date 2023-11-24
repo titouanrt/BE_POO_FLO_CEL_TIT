@@ -24,14 +24,14 @@ class Application
     */    
     ~Application();    
     /**
-     * @fn void init_application(void)
+     * @fn void init(void)
      * @brief Fonction d'initialisation de l'application
     */
-    void init_application(void);
+    void init(void);
     /**
-     * @fn void run_appplication(void)
+     * @fn void run(void)
      * @brief Fonction de lancement de l'application
     */
-    void run_appplication(void);
+    void run(void);
 };
 #endif

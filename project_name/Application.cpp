@@ -18,14 +18,14 @@ Application::~Application()
   ;
 }  
 
-void Application::init_application(void)
+void Application::init(void)
 {
   // Code
     ;
 }
 
 
-void Application::run_appplication(void)
+void Application::run(void)
 {
   // Code
     ;
