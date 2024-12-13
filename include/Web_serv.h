@@ -21,6 +21,7 @@ class WebServ{
       static IPAddress myIP;
 public:
 
+    //Création du point d'accès wifi
     static void ConnectWiFi(String ssid, String passwd){
         Serial.println();
         Serial.print("Configuring access point...");
@@ -39,6 +40,7 @@ public:
       server.handleClient();
     }
     
+    //actualisation du code javascript pour mettre à jour les variables
     static void updateStates(){
       script = R"rawliteral(
 var ouvert = 0;
@@ -138,6 +140,7 @@ const interval = setInterval(function() {
       step_5 = s5;
     }
 
+    //envoi des pages web
     static void handleRoot() {
         server.send(200, "text/html", String(index_html.c_str()));
     }
@@ -159,13 +162,12 @@ const interval = setInterval(function() {
     }
 
     static void begin(){
-      
-
       server.send(200, "text/html", String(index_html.c_str()));
       server.send(200, "text/html", String(ouverture_html.c_str()));
       server.send(200, "text/html", String(solutions.c_str()));
       server.send(200, "text/css", String(style.c_str()));
       server.send(200, "text/script", String(script.c_str()));
+      //définition de l'adresse des pages web
       server.on("/", handleRoot);
       server.on("/index.html", handleRoot);
       server.on("/ouverture.html", handleOuv);

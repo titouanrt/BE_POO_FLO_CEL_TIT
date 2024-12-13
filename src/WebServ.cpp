@@ -1,11 +1,14 @@
 #include <WString.h>>
 #include "Web_serv.h"
 
+//initialisations de la classe WebServ
 bool WebServ::step_3 = false;
 bool WebServ::step_4 = false;
 bool WebServ::step_5 = false;
 ESP8266WebServer WebServ::server = ESP8266WebServer();
 IPAddress WebServ::myIP = IPAddress();
+
+//ajout du code des pages web : html css et javascript
 String WebServ::index_html = R"rawliteral(
 <!DOCTYPE html>
 <html>

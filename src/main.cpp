@@ -8,6 +8,8 @@
 #include <exception>
 #include "Web_serv.h"
 #include <vector>
+
+//définition du nom et du mot de passe du point d'accès wifi
 #ifndef APSSID
 #define APSSID "ESPap"
 #define APPSK "thereisnospoon"
@@ -291,6 +293,7 @@ public:
   }
 };
 
+//instanciation des capteurs et actionneurs 
 Button_sensor button = Button_sensor(D7);
 LCD_Display lcd_disp = LCD_Display(255,75,155);
 Potentiometer_sensor potar = Potentiometer_sensor(A0);
@@ -303,24 +306,26 @@ bool state = false;
 
 
 void setup() {
-  Serial.begin(9600);
-  try {
+  Serial.begin(9600); //configuration du port serie du 9600 bauds
+  try { //tentative de mise en place du point d'accès wifi
     WebServ::ConnectWiFi("ESPap", "thereisnospoon");
   } catch (WiFiExceptions e) {
       Serial.print(e.what());
   }
-  
   WebServ::begin();
 }
 
 void loop() {
-  WebServ::update();
+  WebServ::update(); //actualisation des pages web
+
+  //lecture des valeurs renvoyées par les capteurs
   potar.ReadCurrentResistance();
   potar.ReadCurrentVoltage();
   button.ReadCurrentButton();
   touch.ReadTouch();
   temp_sens.ReadCurrentTemp();
 
+  //mise à jour de l'affichage sur l'écran LCD toutes les 500ms
   auto now = millis();
   if(now - lasttime > 500){
     lasttime = now;
@@ -329,6 +334,7 @@ void loop() {
     lcd_disp.LCD_PrintLower(String(temp_sens.GetTemperature()));
   }
   
+  //1ere sécurité : bouton poussoir et capteur de touché
   if ( (button.GetButton() == 1 && touch.GetTouchStatus() == 1) || etape_1)
   {
     etape_1 = true;
@@ -339,28 +345,34 @@ void loop() {
       {
         etape_3 = true;
         Serial.print("etape_3 ok\n");
+        //mise à jour du tableau de la page web
         WebServ::SetStep3(etape_3);
         WebServ::updateStates();
       } 
     }
   }
 
+  //2e sécurité : détection de température
   if (temp_sens.GetTemperature() > 30 && !etape_4)
   {
     etape_4 = true;
     Serial.print("etape_4 ok\n");
+    //mise à jour du tableau de la page web
     WebServ::SetStep4(etape_4);
     WebServ::updateStates();
   }
 
+  //3e sécurité : configuration du potentiomètre
   if (button.GetButton() == 1 && ( potar.GetCurrentVoltage() > 1.5 && potar.GetCurrentVoltage() < 2 ) && !etape_5)
   {
     etape_5 = true;
     Serial.print("etape_4 ok\n");
+    //mise à jour du tableau de la page web
     WebServ::SetStep5(etape_5);
     WebServ::updateStates();
   }
   
+  //Détection de l'ouverture du coffre
   if (etape_3 && etape_4 && etape_5)
   {
     Serial.print("Unlocked\n");

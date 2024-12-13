@@ -10,7 +10,7 @@ La première sécurité combine 2 capteurs. En moins de 10 secondes vous devez r
 <li> Appuyer sur le bouton poussoir 2 fois</li>
 
 <h3>Potentiomètre</h3>
-Tourner le potentiomètre jusqu'à atteindre une tension se situant entre 1.5V et 2V.
+Tourner le potentiomètre jusqu'à atteindre une tension se situant entre 1.5V et 2V. Puis appuyer sur le bouton poussoir.
 
 <h3>Capteur de température</h3>
 La température autour du coffre doit atteindre les 30 degrés.<br><br>
